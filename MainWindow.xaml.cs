@@ -44,7 +44,27 @@ namespace Snake
 
         private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
+            if (gameState.GameOver)
+            {
+                return;
+            }
 
+            switch (e.Key)
+            {
+                case Key.Left:
+                    gameState.ChangeDirection(Direction.Left);
+                    break;
+                case Key.Right:
+                    gameState.ChangeDirection(Direction.Right);
+                    break;
+                case Key.Down:
+                    gameState.ChangeDirection(Direction.Down);
+                    break;
+                case Key.Up:
+                    gameState.ChangeDirection(Direction.Up);
+                    break;
+
+            }
         }
 
         private void Draw()
