@@ -37,9 +37,10 @@ namespace Snake
             gameState = new GameState(rows, cols);
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             Draw();
+            await GameLoop();
         }
 
         private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
@@ -63,7 +64,6 @@ namespace Snake
                 case Key.Up:
                     gameState.ChangeDirection(Direction.Up);
                     break;
-
             }
         }
 
@@ -81,6 +81,16 @@ namespace Snake
                     GridValue gridVal = gameState.Grid[r, c];
                     gridImages[r, c].Source = gridValToImage[gridVal];
                 }
+            }
+        }
+
+        private async Task GameLoop()
+        {
+            while (!gameState.GameOver)
+            {
+                await Task.Delay(200);
+                gameState.Move();
+                Draw();
             }
         }
 
