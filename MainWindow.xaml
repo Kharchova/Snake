@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Snake"
         mc:Ignorable="d"
+        MinHeight="300" MinWidth="300"
         Title="Snake" Height="500" Width="800"
         Background="{StaticResource BackgroundColor}"
         Foreground="{StaticResource TextColor}"
@@ -35,6 +36,7 @@
                 BorderThickness="1.5"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
+                Margin="20,0,20,20"
                 RenderOptions.EdgeMode="Aliased">
             <UniformGrid x:Name="GameGrid"
                          Height="400"
