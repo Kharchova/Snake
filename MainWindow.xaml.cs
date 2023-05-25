@@ -41,8 +41,17 @@ namespace Snake
         private async Task RunGame()
         {
             Draw();
+            await ShowCoutDown();
             Overlay.Visibility = Visibility.Hidden;
             await GameLoop();
+        }
+        private async Task ShowCoutDown()
+        {
+            for (int i = 3; i >= 0; i--)
+            {
+                OverlayText.Text = i.ToString();
+                await Task.Delay(500);
+            }
         }
         private async void Window_PreviewKeyDown(object sender, KeyEventArgs e)
         {
