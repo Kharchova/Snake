@@ -27,6 +27,14 @@ namespace Snake
             {GridValue.Snake, Images.Body }
         };
 
+        private readonly Dictionary<Direction, int> dirToRotation = new Dictionary<Direction, int>()
+        {
+            {Direction.Up, 0 },
+            {Direction.Right, 90 },
+            {Direction.Down, 180 },
+            {Direction.Left, 270 }
+        };
+
         private readonly int rows = 15, cols = 15;
         private readonly Image[,] gridImages;
         private GameState gameState;
@@ -44,6 +52,15 @@ namespace Snake
             await ShowCoutDown();
             Overlay.Visibility = Visibility.Hidden;
             await GameLoop();
+        }
+        private void DrawSnakeHead()
+        {
+            Position headPos = gameState.HeadPoSition();
+            Image image = gridImages[headPos.Row, headPos.Col];
+            image.Source = Images.Head;
+
+            int rotation = dirToRotation[gameState.Dir];
+            image.RenderTransform = new RotateTransform(rotation);
         }
         private async Task ShowCoutDown()
         {
@@ -94,6 +111,7 @@ namespace Snake
         private void Draw()
         {
             DrawGrid();
+            DrawSnakeHead();
             ScoreText.Text = $"SCORE {gameState.Score}";
         }
 
@@ -131,7 +149,8 @@ namespace Snake
                 {
                     Image image = new Image
                     {
-                        Source = Images.Empty
+                        Source = Images.Empty,
+                        RenderTransformOrigin = new Point(0.5, 0.5)
                     };
 
                     images[r, c] = image;
